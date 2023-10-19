@@ -1,6 +1,8 @@
 #ifndef __GRAPH__
 #define __GRAPH__
 
+#include "datathread.h"
+
 #include <string.h>
 #include <assert.h>
 #include <stdlib.h>
@@ -13,22 +15,6 @@
 typedef struct link_ link_t;
 
 typedef struct node_ node_t;
-
-typedef struct graph_ graph_t;
-
-typedef struct _nlthread
-{
-    node_t          * node;
-    struct _nlthread *left;
-    struct _nlthread *right;
-} nlthread_t;
-
-typedef struct _glthread
-{
-    graph_t         * graph;
-    struct _glthread *left;
-    struct _glthread *right;
-} glthread_t;
 
 typedef struct interface_
 {
@@ -48,14 +34,14 @@ struct node_
 {
     char node_name[NODE_NAME_SIZE];
     interface_t *intf[MAX_INTF_PER_NODE];
-    glthread_t graph_list;   
+    datathread_t graph_list;   
 };
 
 struct graph_
 {
     char topology_name[TOPO_NAME_SIZE];
-    nlthread_t node_list;
-};
+    datathread_t node_list;
+} graph_t;
 
 static inline node_t*
 get_nbr_node(interface_t *intf)
@@ -114,18 +100,5 @@ node_t  * create_graph_node(graph_t * graph, char * name);
     
 void insert_link_between_two_nodes(node_t * node1, node_t * node2, char * name1, char * name2, int cost);
 
-/*------------------------------------------Linked List Functions-------------------------------------------- --*/
-
-void
-init_glthread(glthread_t *glthread);
-
-void
-init_nlthread(nlthread_t *nlthread);
-
-void
-glthread_add_next(glthread_t *glthread, graph_t *graph);
-
-void
-nlthread_add_next(nlthread_t *nlthread, node_t *node);
 
 #endif
