@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sr1/workspace/learning/tcpip_stack/CMakeFiles /home/sr1/workspace/learning/tcpip_stack//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
+	cd /home/sr1/workspace/learning/tcpip_stack && $(CMAKE_COMMAND) -E cmake_progress_start /home/sr1/workspace/learning/tcpip_stack/CMakeFiles /home/sr1/workspace/learning/tcpip_stack/src//CMakeFiles/progress.marks
+	cd /home/sr1/workspace/learning/tcpip_stack && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/sr1/workspace/learning/tcpip_stack/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /home/sr1/workspace/learning/tcpip_stack && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,92 +103,18 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/sr1/workspace/learning/tcpip_stack && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/sr1/workspace/learning/tcpip_stack && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/sr1/workspace/learning/tcpip_stack && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
-
-#=============================================================================
-# Target rules for targets named test
-
-# Build rule for target.
-test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test
-.PHONY : test
-
-# fast build rule for target.
-test/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
-.PHONY : test/fast
-
-#=============================================================================
-# Target rules for targets named graph
-
-# Build rule for target.
-graph: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 graph
-.PHONY : graph
-
-# fast build rule for target.
-graph/fast:
-	$(MAKE) $(MAKESILENT) -f src/graph/CMakeFiles/graph.dir/build.make src/graph/CMakeFiles/graph.dir/build
-.PHONY : graph/fast
-
-testapp.o: testapp.c.o
-.PHONY : testapp.o
-
-# target to build an object file
-testapp.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/testapp.c.o
-.PHONY : testapp.c.o
-
-testapp.i: testapp.c.i
-.PHONY : testapp.i
-
-# target to preprocess a source file
-testapp.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/testapp.c.i
-.PHONY : testapp.c.i
-
-testapp.s: testapp.c.s
-.PHONY : testapp.s
-
-# target to generate assembly for a file
-testapp.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/testapp.c.s
-.PHONY : testapp.c.s
-
-topo.o: topo.c.o
-.PHONY : topo.o
-
-# target to build an object file
-topo.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/topo.c.o
-.PHONY : topo.c.o
-
-topo.i: topo.c.i
-.PHONY : topo.i
-
-# target to preprocess a source file
-topo.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/topo.c.i
-.PHONY : topo.c.i
-
-topo.s: topo.c.s
-.PHONY : topo.s
-
-# target to generate assembly for a file
-topo.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/topo.c.s
-.PHONY : topo.c.s
 
 # Help Target
 help:
@@ -198,14 +124,6 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... graph"
-	@echo "... test"
-	@echo "... testapp.o"
-	@echo "... testapp.i"
-	@echo "... testapp.s"
-	@echo "... topo.o"
-	@echo "... topo.i"
-	@echo "... topo.s"
 .PHONY : help
 
 
@@ -217,6 +135,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/sr1/workspace/learning/tcpip_stack && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -15,6 +15,8 @@ thread_add_next(thread_t *curr_thread, thread_t *new_thread)
 	if(!curr_thread->right)
     {
         curr_thread->right = new_thread;
+		curr_thread->left = new_thread;
+		new_thread->left = curr_thread;
 		new_thread->left = curr_thread;
         return;   
     }
