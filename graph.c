@@ -4,6 +4,10 @@
 #include <string.h>
 #include <stdio.h>
 
+THREAD_TO_STRUCT(node_from_thread, node_t, graph_list)
+
+THREAD_TO_STRUCT(graph_from_thread, graph_t, node_list)
+
 graph_t * create_new_graph(char * name)
 {
     graph_t* graph = (graph_t*) malloc(sizeof(graph_t));
@@ -12,7 +16,7 @@ graph_t * create_new_graph(char * name)
 
     graph->topology_name[TOPO_NAME_SIZE - 1] = '\0';
 
-    init_glthread(&graph->node_list);
+    init_thread(&graph->node_list);
 
     return graph;
 }
@@ -26,11 +30,9 @@ node_t * create_graph_node(graph_t * graph, char * name)
 
     node->node_name[NODE_NAME_SIZE - 1] = '\0';
 
-    init_nlthread(&node->graph_list);	
+    init_thread(&node->graph_list);	
 
-    nlthread_add_next(&graph->node_list, node);
-
-    glthread_add_next(&node->graph_list, graph);
+    thread_add_next(&graph->node_list, &node->graph_list);
 
     return node;
 }
@@ -71,38 +73,49 @@ void insert_link_between_two_nodes(node_t * node1, node_t * node2, char * name1,
 
 void dump_graph(graph_t * graph)
 {
+	printf("*************************\n");
+	
+	printf("-------------------------\n");	
 
-    printf("Topology Name = %s\n", graph->topology_name);
+    printf(" ---- %s\n", graph->topology_name);
+	
+	printf("-------------------------\n");
 
-    nlthread_t *thread = &graph->node_list;
+	printf("*************************\n\n");
 
-    nlthread_t *current = thread;
+    thread_t * thread;
 
-    for(int i = 0; i < 2; i++)
-    {
-        dump_node(thread->node);
-		thread = thread->right;
+	thread = &graph->node_list;
+
+	thread = get_base(thread);
+
+    thread_t *current;
+
+    for(; current != NULL; current = thread)
+    {		
+        dump_node(node_from_thread(thread));
+		thread = thread->right;				
     }
      
 }
 
 void dump_node(node_t* node)
 {
-    printf("Node Name = %s\n", node->node_name);
+	printf("-------------------------\n");	
 
-	/*interface_t *intf;
+    printf(" ---- Node %s\n", node->node_name);
 
-    for(int i = 0; i < MAX_INTF_PER_NODE; i++)
-    {
-		intf = &node->intf[i];
-        dump_intf(intf);
+	printf("-------------------------\n");
+
+    for(int i = 0; node->intf[i] != NULL; i++)
+    {	
+        dump_intf(node->intf[i]);	
     }
-	*/
 }
 
 void dump_intf(interface_t * intf)
 {
-    printf("Interace Name = %s\n", intf->intf_name);
+    printf(" Interface %s\n", intf->intf_name);
 
-    printf("Link cost = %i\n", intf->link->cost);    
+    printf(" Cost = %i\n\n", intf->link->cost);    
 }
