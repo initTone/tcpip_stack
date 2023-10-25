@@ -1,7 +1,7 @@
 #ifndef __GRAPH__
 #define __GRAPH__
 
-#include "datathread.h"
+#include "thread.h"
 
 #include <string.h>
 #include <assert.h>
@@ -33,14 +33,14 @@ struct link_
 struct node_
 {
     char node_name[NODE_NAME_SIZE];
-    interface_t *intf[MAX_INTF_PER_NODE];
-    datathread_t graph_list;   
+    interface_t *intf [MAX_INTF_PER_NODE];
+    thread_t graph_list;   
 };
 
-struct graph_
+typedef struct graph_
 {
     char topology_name[TOPO_NAME_SIZE];
-    datathread_t node_list;
+    thread_t node_list;
 } graph_t;
 
 static inline node_t*
@@ -84,9 +84,8 @@ static inline node_t *
 get_node_by_node_name(graph_t *topo, char *node_name)
 {
       
-}
+};
 */
-/*----------------------------------------------------Graph API------------------------------------------------*/
 
 void dump_graph(graph_t * graph);
 
