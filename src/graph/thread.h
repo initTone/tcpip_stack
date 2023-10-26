@@ -13,6 +13,9 @@ init_thread(thread_t *thread);
 void
 thread_add_next(thread_t *curr_thread, thread_t *new_thread);
 
+void
+thread_add_before(thread_t *curr_thread, thread_t *new_thread);
+
 static inline thread_t *
 get_base(thread_t * base)
 {

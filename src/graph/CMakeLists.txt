@@ -1,3 +1,3 @@
-add_library(graph STATIC graph.c thread.c)
+add_library(${LIBRARY_NAME} STATIC graph.c thread.c)
 
 target_include_directories(graph PUBLIC "./")

@@ -84,14 +84,16 @@ void dump_graph(graph_t * graph)
 	printf("*************************\n\n");
 
     thread_t * thread;
+	thread_t * end;
 
 	thread = &graph->node_list;
+	end = &graph->node_list;
 
 	thread = get_base(thread);
 
     thread_t *current;
 
-    for(; current != NULL; current = thread)
+    for(; current != end; current = thread)
     {		
         dump_node(node_from_thread(thread));
 		thread = thread->right;				
