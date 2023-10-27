@@ -4,10 +4,6 @@
 #include <string.h>
 #include <stdio.h>
 
-THREAD_TO_STRUCT(node_from_thread, node_t, graph_list)
-
-THREAD_TO_STRUCT(graph_from_thread, graph_t, node_list)
-
 graph_t * create_new_graph(char * name)
 {
     graph_t* graph = (graph_t*) malloc(sizeof(graph_t));
@@ -91,11 +87,13 @@ void dump_graph(graph_t * graph)
 
 	thread = get_base(thread);
 
-    thread_t *current;
+    thread_t * current;
+
+	current = thread;
 
     for(; current != end; current = thread)
     {		
-        dump_node(node_from_thread(thread));
+        dump_node(node_from_thread(current));
 		thread = thread->right;				
     }
      

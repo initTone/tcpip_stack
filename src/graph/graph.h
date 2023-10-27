@@ -43,6 +43,8 @@ typedef struct graph_
     thread_t node_list;
 } graph_t;
 
+THREAD_TO_STRUCT(node_from_thread, node_t, graph_list)
+
 static inline node_t*
 get_nbr_node(interface_t *intf)
 {
@@ -79,13 +81,34 @@ get_node_intf_by_name(node_t * node, char * name)
     return NULL;
 };
 
-/*
 static inline node_t *
-get_node_by_node_name(graph_t *topo, char *node_name)
+get_node_by_node_name(graph_t * graph, char * node_name)
 {
-      
+	thread_t * thread;
+	thread_t * end;
+
+	thread = &graph->node_list;
+	thread = get_base(thread);
+
+	end = &graph->node_list;
+
+    thread_t *current;
+
+	current = thread;
+
+	node_t * node;
+
+    for(; current != end; current = thread)
+    {		
+        node = node_from_thread(current);
+		if(strcmp(node->node_name, node_name))
+		{
+			return node;
+		}
+		thread = thread->right;				
+    }
+	return NULL;      
 };
-*/
 
 void dump_graph(graph_t * graph);
 
