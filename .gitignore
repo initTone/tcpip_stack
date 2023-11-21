@@ -3,6 +3,7 @@
 build
 CMakeFiles
 CMakeCache.txt
+CMakeLists.txt.user
 cmake_install.cmake
 test
 tcpip
